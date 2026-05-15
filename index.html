@@ -6,203 +6,226 @@
     <title>Guardian360 — Seguridad Ciudadana en tiempo real</title>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --azul:  #0D1B6E;
-            --azul2: #1A237E;
-            --azul3: #3949AB;
-            --oro:   #F9A825;
-            --oro2:  #FF8F00;
-            --gris:  #F4F6FB;
-            --sombra: rgba(13,27,110,0.18);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'DM Sans', sans-serif; color: var(--azul); background: #fff; overflow-x: hidden; }
+        :root { --azul:#0D1B6E; --azul2:#1A237E; --azul3:#3949AB; --oro:#F9A825; --oro2:#FF8F00; --rojo:#E53935; --verde:#2E7D32; --gris:#F4F6FB; --sombra:rgba(13,27,110,0.18); }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body { font-family:'DM Sans',sans-serif; color:var(--azul); background:#fff; overflow-x:hidden; }
 
         /* NAV */
-        nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-            background: rgba(13,27,110,0.97); backdrop-filter: blur(12px);
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 0 40px; height: 64px;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
-        }
-        .nav-logo { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: #fff; }
-        .nav-logo span { color: var(--oro); }
-        .nav-links { display: flex; gap: 32px; }
-        .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
-        .nav-links a:hover { color: var(--oro); }
-        .nav-btn { background: var(--oro); color: var(--azul); padding: 8px 20px; border-radius: 30px; font-weight: 700; font-size: 13px; text-decoration: none; transition: all 0.2s; }
-        .nav-btn:hover { background: var(--oro2); transform: translateY(-1px); }
+        nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(13,27,110,0.97); backdrop-filter:blur(12px); display:flex; align-items:center; justify-content:space-between; padding:0 40px; height:64px; box-shadow:0 2px 20px rgba(0,0,0,0.3); }
+        .nav-logo { font-family:'Syne',sans-serif; font-size:22px; font-weight:800; color:#fff; }
+        .nav-logo span { color:var(--oro); }
+        .nav-links { display:flex; gap:24px; }
+        .nav-links a { color:rgba(255,255,255,0.8); text-decoration:none; font-size:13px; font-weight:500; transition:color 0.2s; }
+        .nav-links a:hover { color:var(--oro); }
+        .nav-btn { background:var(--oro); color:var(--azul); padding:8px 18px; border-radius:30px; font-weight:700; font-size:13px; text-decoration:none; transition:all 0.2s; }
+        .nav-btn:hover { background:var(--oro2); transform:translateY(-1px); }
 
         /* HERO */
-        #inicio {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #0A0E2A 0%, #0D1B6E 45%, #1A237E 100%);
-            display: flex; align-items: center; position: relative; overflow: hidden; padding-top: 64px;
-        }
-        .hero-bg {
-            position: absolute; inset: 0;
-            background: radial-gradient(ellipse 60% 50% at 80% 50%, rgba(249,168,37,0.08) 0%, transparent 70%),
-                        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(57,73,171,0.3) 0%, transparent 60%);
-        }
-        .hero-grid {
-            position: absolute; inset: 0; opacity: 0.04;
-            background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
-            background-size: 60px 60px;
-        }
-        .hero-content {
-            position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 80px 40px;
-            display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
-        }
-        .hero-badge {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: rgba(249,168,37,0.15); border: 1px solid rgba(249,168,37,0.3);
-            color: var(--oro); padding: 6px 16px; border-radius: 30px;
-            font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 24px;
-            animation: fadeDown 0.8s ease both;
-        }
-        .hero-title {
-            font-family: 'Syne', sans-serif; font-size: clamp(42px, 5vw, 68px); font-weight: 800;
-            line-height: 1.05; color: #fff; margin-bottom: 24px; animation: fadeDown 0.8s 0.1s ease both;
-        }
-        .hero-title span { color: var(--oro); }
-        .hero-desc { font-size: 18px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 40px; animation: fadeDown 0.8s 0.2s ease both; }
-        .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; animation: fadeDown 0.8s 0.3s ease both; }
-        .btn-primary {
-            background: linear-gradient(135deg, var(--oro), var(--oro2)); color: var(--azul);
-            padding: 16px 32px; border-radius: 50px; font-weight: 700; font-size: 15px;
-            text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
-            box-shadow: 0 8px 30px rgba(249,168,37,0.4); transition: all 0.3s;
-        }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(249,168,37,0.5); }
-        .btn-secondary {
-            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); color: #fff;
-            padding: 16px 32px; border-radius: 50px; font-weight: 600; font-size: 15px;
-            text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s;
-        }
-        .btn-secondary:hover { background: rgba(255,255,255,0.18); }
+        #inicio { min-height:100vh; position:relative; overflow:hidden; padding-top:64px; display:flex; align-items:center; }
+        .hero-bg-img { position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=1600&q=80') center/cover no-repeat; }
+        .hero-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(10,14,42,0.92) 0%,rgba(13,27,110,0.88) 50%,rgba(26,35,126,0.82) 100%); }
+        .hero-content { position:relative; z-index:2; max-width:1200px; margin:0 auto; padding:80px 40px; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+        .hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(249,168,37,0.15); border:1px solid rgba(249,168,37,0.3); color:var(--oro); padding:6px 16px; border-radius:30px; font-size:12px; font-weight:600; letter-spacing:1px; text-transform:uppercase; margin-bottom:24px; animation:fadeDown 0.8s ease both; }
+        .hero-title { font-family:'Syne',sans-serif; font-size:clamp(38px,5vw,64px); font-weight:800; line-height:1.05; color:#fff; margin-bottom:24px; animation:fadeDown 0.8s 0.1s ease both; }
+        .hero-title span { color:var(--oro); }
+        .hero-desc { font-size:17px; color:rgba(255,255,255,0.75); line-height:1.7; margin-bottom:40px; animation:fadeDown 0.8s 0.2s ease both; }
+        .hero-btns { display:flex; gap:12px; flex-wrap:wrap; animation:fadeDown 0.8s 0.3s ease both; }
+        .btn-primary { background:linear-gradient(135deg,var(--oro),var(--oro2)); color:var(--azul); padding:14px 28px; border-radius:50px; font-weight:700; font-size:14px; text-decoration:none; display:inline-flex; align-items:center; gap:8px; box-shadow:0 8px 30px rgba(249,168,37,0.4); transition:all 0.3s; }
+        .btn-primary:hover { transform:translateY(-3px); box-shadow:0 12px 40px rgba(249,168,37,0.5); }
+        .btn-secondary { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.25); color:#fff; padding:14px 28px; border-radius:50px; font-weight:600; font-size:14px; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:all 0.3s; }
+        .btn-secondary:hover { background:rgba(255,255,255,0.18); }
+        .btn-apk { background:linear-gradient(135deg,#1B5E20,#2E7D32); color:#fff; padding:14px 28px; border-radius:50px; font-weight:700; font-size:14px; text-decoration:none; display:inline-flex; align-items:center; gap:8px; box-shadow:0 8px 30px rgba(46,125,50,0.4); transition:all 0.3s; }
+        .btn-apk:hover { transform:translateY(-3px); }
 
-        /* PHONE */
-        .hero-phone { animation: fadeLeft 0.8s 0.2s ease both; display: flex; justify-content: center; }
-        .phone-frame {
-            width: 280px; height: 560px;
-            background: linear-gradient(145deg, #1E2F8E, #0D1B6E); border-radius: 40px;
-            border: 2px solid rgba(255,255,255,0.15);
-            box-shadow: 0 40px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            gap: 20px; padding: 40px 24px; position: relative; overflow: hidden;
-        }
-        .phone-frame::before { content: ''; position: absolute; top: 12px; width: 80px; height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; }
-        .phone-shield { font-size: 72px; filter: drop-shadow(0 8px 20px rgba(249,168,37,0.4)); animation: pulse 3s ease-in-out infinite; }
-        .phone-logo { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: #fff; }
-        .phone-logo span { color: var(--oro); }
-        .phone-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; }
-        .phone-stat { background: rgba(255,255,255,0.08); border-radius: 12px; padding: 10px; text-align: center; }
-        .phone-stat .num { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--oro); }
-        .phone-stat .lbl { font-size: 9px; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.5px; }
-        .phone-sos { width: 100%; padding: 14px; background: linear-gradient(135deg, #C62828, #E53935); border-radius: 14px; text-align: center; color: #fff; font-weight: 700; font-size: 16px; letter-spacing: 2px; box-shadow: 0 4px 20px rgba(229,57,53,0.4); }
+        /* PHONE MOCKUP HERO */
+        .hero-visual { animation:fadeLeft 0.8s 0.2s ease both; display:flex; justify-content:center; }
+        .phone-shell { width:240px; height:480px; background:linear-gradient(160deg,#1A237E,#0D1B6E); border-radius:36px; border:2px solid rgba(255,255,255,0.2); box-shadow:0 40px 80px rgba(0,0,0,0.6); overflow:hidden; position:relative; }
+        .phone-notch { position:absolute; top:10px; left:50%; transform:translateX(-50%); width:60px; height:5px; background:rgba(255,255,255,0.2); border-radius:3px; z-index:5; }
+        .phone-screen { position:absolute; inset:20px 8px 8px; background:#0A0E1A; border-radius:24px; overflow:hidden; }
+        .ps-topbar { background:linear-gradient(90deg,#0D1B6E,#1A237E); padding:8px 10px; display:flex; align-items:center; justify-content:space-between; }
+        .ps-logo { font-family:'Syne',sans-serif; font-size:12px; font-weight:800; color:#fff; }
+        .ps-logo b { color:var(--oro); }
+        .ps-online { font-size:8px; color:#4CAF50; font-weight:700; display:flex; align-items:center; gap:3px; }
+        .ps-online-dot { width:5px; height:5px; border-radius:50%; background:#4CAF50; animation:pulse 1.5s infinite; }
+        .ps-sos { margin:8px 10px; background:linear-gradient(135deg,#B71C1C,#E53935); border-radius:10px; padding:12px; text-align:center; box-shadow:0 4px 14px rgba(229,57,53,0.4); }
+        .ps-sos-t { font-family:'Syne',sans-serif; font-size:16px; font-weight:800; color:#fff; letter-spacing:3px; }
+        .ps-sos-s { font-size:8px; color:rgba(255,255,255,0.7); margin-top:1px; }
+        .ps-alert { margin:0 10px 6px; background:rgba(229,57,53,0.15); border:1px solid rgba(229,57,53,0.3); border-radius:8px; padding:8px 10px; display:flex; align-items:center; gap:7px; }
+        .ps-alert-text { font-size:9px; color:#fff; font-weight:600; }
+        .ps-alert-sub { font-size:8px; color:rgba(255,255,255,0.5); }
+        .ps-map { margin:0 10px 6px; border-radius:8px; height:70px; overflow:hidden; position:relative; }
+        .ps-map img { width:100%; height:100%; object-fit:cover; opacity:0.7; }
+        .ps-map-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
+        .ps-map-pin { width:14px; height:14px; background:var(--rojo); border-radius:50%; border:2px solid #fff; box-shadow:0 0 8px var(--rojo); }
+        .ps-map-label { position:absolute; bottom:4px; left:8px; font-size:8px; color:rgba(255,255,255,0.8); background:rgba(0,0,0,0.5); padding:2px 5px; border-radius:4px; }
+        .ps-grid { display:grid; grid-template-columns:1fr 1fr; gap:5px; margin:0 10px; }
+        .ps-card { background:rgba(255,255,255,0.07); border-radius:7px; padding:7px; text-align:center; }
+        .ps-card-num { font-family:'Syne',sans-serif; font-size:13px; font-weight:800; color:var(--oro); }
+        .ps-card-lbl { font-size:7px; color:rgba(255,255,255,0.5); text-transform:uppercase; }
 
-        /* STATS BAR */
-        .stats-bar { background: var(--azul); padding: 40px; }
-        .stats-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
-        .stat-item .big { font-family: 'Syne', sans-serif; font-size: 40px; font-weight: 800; color: var(--oro); line-height: 1; }
-        .stat-item .small { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 6px; font-weight: 500; }
+        /* STATS */
+        .stats-bar { background:var(--azul); padding:40px; }
+        .stats-inner { max-width:1000px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:20px; text-align:center; }
+        .stat-item .big { font-family:'Syne',sans-serif; font-size:40px; font-weight:800; color:var(--oro); line-height:1; }
+        .stat-item .small { font-size:13px; color:rgba(255,255,255,0.7); margin-top:6px; }
 
         /* SECCIONES */
-        section { padding: 100px 40px; }
-        .section-inner { max-width: 1200px; margin: 0 auto; }
-        .section-tag { display: inline-block; background: var(--gris); color: var(--azul3); padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
-        .section-title { font-family: 'Syne', sans-serif; font-size: clamp(28px, 3.5vw, 44px); font-weight: 800; line-height: 1.15; margin-bottom: 16px; color: var(--azul); }
-        .section-title span { color: var(--azul3); }
-        .section-desc { font-size: 17px; color: #555; line-height: 1.7; max-width: 600px; }
+        section { padding:100px 40px; }
+        .section-inner { max-width:1200px; margin:0 auto; }
+        .section-tag { display:inline-block; background:var(--gris); color:var(--azul3); padding:4px 14px; border-radius:20px; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:16px; }
+        .section-title { font-family:'Syne',sans-serif; font-size:clamp(28px,3.5vw,44px); font-weight:800; line-height:1.15; margin-bottom:16px; color:var(--azul); }
+        .section-title span { color:var(--azul3); }
+        .section-desc { font-size:17px; color:#555; line-height:1.7; max-width:600px; }
+
+        /* ESCENARIOS CON FOTOS REALES */
+        #escenarios { background:var(--gris); }
+        .escenarios-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:56px; }
+        .escenario-card { border-radius:20px; overflow:hidden; box-shadow:0 4px 24px var(--sombra); transition:all 0.3s; }
+        .escenario-card:hover { transform:translateY(-6px); box-shadow:0 16px 48px var(--sombra); }
+        .esc-img { height:220px; position:relative; overflow:hidden; }
+        .esc-img img { width:100%; height:100%; object-fit:cover; transition:transform 0.4s; }
+        .escenario-card:hover .esc-img img { transform:scale(1.06); }
+        .esc-overlay { position:absolute; inset:0; background:linear-gradient(to bottom,rgba(0,0,0,0.1),rgba(0,0,0,0.6)); }
+        .esc-badge { position:absolute; top:12px; left:12px; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:700; display:flex; align-items:center; gap:4px; backdrop-filter:blur(8px); }
+        .esc-badge.rojo { background:rgba(183,28,28,0.85); color:#fff; }
+        .esc-badge.naranja { background:rgba(230,81,0,0.85); color:#fff; }
+        .esc-badge.azul { background:rgba(13,71,161,0.85); color:#fff; }
+        .esc-badge.verde { background:rgba(27,94,32,0.85); color:#fff; }
+        .live-dot { width:6px; height:6px; border-radius:50%; background:#fff; animation:pulse 1s infinite; }
+        .esc-title-overlay { position:absolute; bottom:14px; left:14px; right:14px; }
+        .esc-title-overlay h3 { font-family:'Syne',sans-serif; font-size:16px; font-weight:800; color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.5); }
+        .esc-info { padding:18px 20px; background:#fff; }
+        .esc-tag { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
+        .esc-tag.rojo { color:var(--rojo); }
+        .esc-tag.naranja { color:var(--oro2); }
+        .esc-tag.azul { color:var(--azul3); }
+        .esc-tag.verde { color:var(--verde); }
+        .esc-desc { font-size:13px; color:#666; line-height:1.6; }
+
+        /* PANELES */
+        #paneles { background:#fff; }
+        .paneles-grid { display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-top:56px; }
+        .panel-card { border-radius:24px; overflow:hidden; box-shadow:0 8px 40px var(--sombra); transition:transform 0.3s; }
+        .panel-card:hover { transform:translateY(-6px); }
+        .panel-img { height:240px; position:relative; overflow:hidden; }
+        .panel-img img { width:100%; height:100%; object-fit:cover; }
+        .panel-img-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
+        .panel-screen-mini { width:85%; background:rgba(13,27,110,0.92); border-radius:12px; overflow:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.4); }
+        .panel-mini-bar { background:linear-gradient(90deg,#0D1B6E,#1A237E); padding:7px 10px; display:flex; align-items:center; justify-content:space-between; }
+        .panel-mini-title { font-family:'Syne',sans-serif; font-size:9px; font-weight:700; color:#fff; }
+        .panel-mini-dots { display:flex; gap:3px; }
+        .panel-mini-dot { width:5px; height:5px; border-radius:50%; }
+        .panel-mini-body { padding:8px; display:grid; grid-template-columns:repeat(3,1fr); gap:5px; }
+        .pm-stat { border-radius:6px; padding:7px; text-align:center; }
+        .pm-stat.r { background:#C62828; }
+        .pm-stat.g { background:#1B5E20; }
+        .pm-stat.b { background:#0D47A1; }
+        .pm-stat-num { font-family:'Syne',sans-serif; font-size:14px; font-weight:800; color:#fff; }
+        .pm-stat-lbl { font-size:7px; color:rgba(255,255,255,0.7); }
+        .panel-mini-map { margin:0 8px 8px; height:50px; background:#0A1020; border-radius:6px; display:flex; align-items:center; justify-content:center; }
+        .panel-mini-map span { font-size:9px; color:rgba(255,255,255,0.4); }
+        .panel-info { background:#fff; padding:28px; }
+        .panel-info-title { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:var(--azul); margin-bottom:8px; }
+        .panel-info-desc { font-size:14px; color:#666; line-height:1.6; margin-bottom:20px; }
+        .panel-btn { display:inline-flex; align-items:center; gap:8px; padding:12px 24px; border-radius:12px; font-weight:700; font-size:14px; text-decoration:none; transition:all 0.3s; }
+        .panel-btn.azul-btn { background:var(--azul); color:#fff; }
+        .panel-btn.azul-btn:hover { background:var(--azul2); transform:translateY(-2px); }
+        .panel-btn.verde-btn { background:var(--verde); color:#fff; }
+        .panel-btn.verde-btn:hover { opacity:0.9; transform:translateY(-2px); }
 
         /* FUNCIONES */
-        #funciones { background: var(--gris); }
-        .funciones-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; margin-top: 56px; }
-        .funcion-card { background: #fff; border-radius: 20px; padding: 32px; box-shadow: 0 4px 20px var(--sombra); transition: all 0.3s; border: 1px solid rgba(26,35,126,0.06); }
-        .funcion-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px var(--sombra); }
-        .funcion-icon { width: 56px; height: 56px; background: var(--azul); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 20px; }
-        .funcion-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: var(--azul); margin-bottom: 10px; }
-        .funcion-desc { font-size: 14px; color: #666; line-height: 1.6; }
+        #funciones { background:var(--gris); }
+        .funciones-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:24px; margin-top:56px; }
+        .funcion-card { background:#fff; border-radius:20px; padding:28px; box-shadow:0 4px 20px var(--sombra); transition:all 0.3s; border:1px solid rgba(26,35,126,0.06); }
+        .funcion-card:hover { transform:translateY(-6px); box-shadow:0 16px 40px var(--sombra); }
+        .funcion-icon { width:52px; height:52px; background:var(--azul); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:26px; margin-bottom:18px; }
+        .funcion-title { font-family:'Syne',sans-serif; font-size:17px; font-weight:700; color:var(--azul); margin-bottom:8px; }
+        .funcion-desc { font-size:13px; color:#666; line-height:1.6; }
 
         /* PARA QUIÉN */
-        .para-quien-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 56px; }
-        .pq-card { border-radius: 24px; padding: 40px 32px; position: relative; overflow: hidden; transition: transform 0.3s; }
-        .pq-card:hover { transform: translateY(-4px); }
-        .pq-card.azul { background: linear-gradient(135deg, #0D1B6E, #1A237E); }
-        .pq-card.verde { background: linear-gradient(135deg, #1B5E20, #2E7D32); }
-        .pq-card.naranja { background: linear-gradient(135deg, #E65100, #F57C00); }
-        .pq-icon { font-size: 56px; margin-bottom: 20px; }
-        .pq-title { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 12px; }
-        .pq-desc { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.6; }
-        .pq-list { list-style: none; margin-top: 20px; }
-        .pq-list li { color: rgba(255,255,255,0.9); font-size: 13px; padding: 4px 0; display: flex; align-items: center; gap: 8px; }
-        .pq-list li::before { content: '✓'; color: var(--oro); font-weight: 700; }
+        .para-quien-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:56px; }
+        .pq-card { border-radius:24px; overflow:hidden; box-shadow:0 8px 32px var(--sombra); transition:transform 0.3s; }
+        .pq-card:hover { transform:translateY(-4px); }
+        .pq-img { height:180px; position:relative; overflow:hidden; }
+        .pq-img img { width:100%; height:100%; object-fit:cover; }
+        .pq-img-overlay { position:absolute; inset:0; display:flex; align-items:flex-end; padding:16px; }
+        .pq-img-overlay.azul { background:linear-gradient(to top,rgba(13,27,110,0.9),rgba(13,27,110,0.2)); }
+        .pq-img-overlay.verde { background:linear-gradient(to top,rgba(27,94,32,0.9),rgba(27,94,32,0.2)); }
+        .pq-img-overlay.naranja { background:linear-gradient(to top,rgba(230,81,0,0.9),rgba(230,81,0,0.2)); }
+        .pq-img-title { font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:#fff; }
+        .pq-body { padding:24px; background:#fff; }
+        .pq-desc { font-size:14px; color:#555; line-height:1.6; margin-bottom:14px; }
+        .pq-list { list-style:none; }
+        .pq-list li { font-size:13px; color:#444; padding:3px 0; display:flex; align-items:center; gap:7px; }
+        .pq-list li::before { content:'✓'; color:var(--azul3); font-weight:700; }
 
         /* ASISTENTE */
-        #asistente { background: var(--azul); }
-        #asistente .section-title { color: #fff; }
-        #asistente .section-title span { color: var(--oro); }
-        #asistente .section-desc { color: rgba(255,255,255,0.7); }
-        .comandos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin-top: 48px; }
-        .comando-item { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 16px 20px; display: flex; align-items: center; gap: 12px; transition: all 0.2s; }
-        .comando-item:hover { background: rgba(255,255,255,0.14); border-color: rgba(249,168,37,0.4); }
-        .comando-icon { font-size: 24px; }
-        .comando-text { font-size: 13px; color: rgba(255,255,255,0.9); font-weight: 500; }
-        .comando-text strong { display: block; color: var(--oro); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+        #asistente { background:var(--azul); }
+        #asistente .section-title { color:#fff; }
+        #asistente .section-title span { color:var(--oro); }
+        #asistente .section-desc { color:rgba(255,255,255,0.7); }
+        .comandos-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:10px; margin-top:48px; }
+        .comando-item { background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:14px 16px; display:flex; align-items:center; gap:10px; transition:all 0.2s; }
+        .comando-item:hover { background:rgba(255,255,255,0.14); border-color:rgba(249,168,37,0.4); }
+        .comando-icon { font-size:22px; }
+        .comando-text { font-size:12px; color:rgba(255,255,255,0.9); }
+        .comando-text strong { display:block; color:var(--oro); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:2px; }
 
         /* DESCARGAR */
-        #descargar { background: linear-gradient(135deg, #0A0E2A, #0D1B6E); text-align: center; }
-        #descargar .section-title { color: #fff; }
-        #descargar .section-title span { color: var(--oro); }
-        #descargar .section-desc { color: rgba(255,255,255,0.7); margin: 0 auto 48px; }
-        .download-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-        .dl-btn { background: #fff; color: var(--azul); padding: 16px 32px; border-radius: 16px; text-decoration: none; display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 16px; box-shadow: 0 8px 30px rgba(0,0,0,0.3); transition: all 0.3s; }
-        .dl-btn:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(0,0,0,0.4); }
-        .dl-btn .icon { font-size: 28px; }
-        .dl-btn .sub { font-size: 11px; font-weight: 400; color: #666; display: block; }
+        #descargar { background:linear-gradient(135deg,#0A0E2A,#0D1B6E); text-align:center; }
+        #descargar .section-title { color:#fff; }
+        #descargar .section-title span { color:var(--oro); }
+        #descargar .section-desc { color:rgba(255,255,255,0.7); margin:0 auto 48px; }
+        .download-btns { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+        .dl-btn { background:#fff; color:var(--azul); padding:16px 24px; border-radius:14px; text-decoration:none; display:flex; align-items:center; gap:10px; font-weight:700; font-size:14px; box-shadow:0 8px 30px rgba(0,0,0,0.3); transition:all 0.3s; }
+        .dl-btn:hover { transform:translateY(-3px); box-shadow:0 14px 40px rgba(0,0,0,0.4); }
+        .dl-btn.verde-dl { background:linear-gradient(135deg,#1B5E20,#2E7D32); color:#fff; }
+        .dl-btn .icon { font-size:24px; }
+        .dl-btn .sub { font-size:10px; font-weight:400; color:#666; display:block; }
+        .dl-btn.verde-dl .sub { color:rgba(255,255,255,0.7); }
 
         /* PRIVACIDAD */
-        #privacidad { background: var(--gris); }
-        .privacidad-content { background: #fff; border-radius: 24px; padding: 48px; margin-top: 48px; box-shadow: 0 4px 20px var(--sombra); }
-        .priv-section { margin-bottom: 36px; }
-        .priv-section h3 { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: var(--azul); margin-bottom: 12px; }
-        .priv-section p, .priv-section li { font-size: 15px; color: #555; line-height: 1.7; }
-        .priv-section ul { padding-left: 20px; }
-        .priv-section li { margin-bottom: 6px; }
-        .priv-date { font-size: 13px; color: #999; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid #eee; }
+        #privacidad { background:var(--gris); }
+        .privacidad-content { background:#fff; border-radius:24px; padding:48px; margin-top:48px; box-shadow:0 4px 20px var(--sombra); }
+        .priv-section { margin-bottom:32px; }
+        .priv-section h3 { font-family:'Syne',sans-serif; font-size:17px; font-weight:700; color:var(--azul); margin-bottom:10px; }
+        .priv-section p,.priv-section li { font-size:14px; color:#555; line-height:1.7; }
+        .priv-section ul { padding-left:20px; }
+        .priv-section li { margin-bottom:5px; }
+        .priv-date { font-size:13px; color:#999; margin-bottom:28px; padding-bottom:20px; border-bottom:1px solid #eee; }
 
         /* FOOTER */
-        footer { background: #060A1A; padding: 60px 40px 32px; color: rgba(255,255,255,0.6); }
-        .footer-inner { max-width: 1200px; margin: 0 auto; }
-        .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 48px; }
-        .footer-logo { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 16px; }
-        .footer-logo span { color: var(--oro); }
-        .footer-desc { font-size: 14px; line-height: 1.7; max-width: 300px; }
-        .footer-col h4 { color: #fff; font-weight: 700; font-size: 14px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
-        .footer-col a { display: block; color: rgba(255,255,255,0.5); text-decoration: none; font-size: 14px; margin-bottom: 10px; transition: color 0.2s; }
-        .footer-col a:hover { color: var(--oro); }
-        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
-        .footer-bottom a { color: rgba(255,255,255,0.5); text-decoration: none; }
-        .footer-bottom a:hover { color: var(--oro); }
+        footer { background:#060A1A; padding:60px 40px 32px; color:rgba(255,255,255,0.6); }
+        .footer-inner { max-width:1200px; margin:0 auto; }
+        .footer-top { display:grid; grid-template-columns:2fr 1fr 1fr; gap:60px; margin-bottom:48px; }
+        .footer-logo { font-family:'Syne',sans-serif; font-size:24px; font-weight:800; color:#fff; margin-bottom:16px; }
+        .footer-logo span { color:var(--oro); }
+        .footer-desc { font-size:14px; line-height:1.7; max-width:300px; }
+        .footer-col h4 { color:#fff; font-weight:700; font-size:13px; margin-bottom:18px; text-transform:uppercase; letter-spacing:1px; }
+        .footer-col a { display:block; color:rgba(255,255,255,0.5); text-decoration:none; font-size:13px; margin-bottom:10px; transition:color 0.2s; }
+        .footer-col a:hover { color:var(--oro); }
+        .footer-bottom { border-top:1px solid rgba(255,255,255,0.1); padding-top:24px; display:flex; justify-content:space-between; align-items:center; font-size:13px; }
+        .footer-bottom a { color:rgba(255,255,255,0.5); text-decoration:none; }
+        .footer-bottom a:hover { color:var(--oro); }
 
         /* ANIMACIONES */
-        @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeLeft { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+        @keyframes fadeDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes fadeLeft { from{opacity:0;transform:translateX(30px)} to{opacity:1;transform:translateX(0)} }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
         /* RESPONSIVE */
-        @media (max-width: 900px) {
-            .hero-content { grid-template-columns: 1fr; text-align: center; }
-            .hero-phone { display: none; }
-            .para-quien-grid { grid-template-columns: 1fr; }
-            .footer-top { grid-template-columns: 1fr; gap: 32px; }
-            .stats-inner { grid-template-columns: repeat(2, 1fr); }
-            nav { padding: 0 20px; }
-            .nav-links { display: none; }
-            section { padding: 64px 20px; }
+        @media(max-width:900px) {
+            .hero-content,.paneles-grid,.para-quien-grid{grid-template-columns:1fr}
+            .hero-visual,.escenarios-grid{display:none}
+            .escenarios-grid{display:grid;grid-template-columns:1fr}
+            .footer-top{grid-template-columns:1fr;gap:32px}
+            .stats-inner{grid-template-columns:repeat(2,1fr)}
+            nav{padding:0 20px}
+            .nav-links{display:none}
+            section{padding:64px 20px}
         }
+        @media(max-width:900px) { .escenarios-grid{display:grid!important;} }
     </style>
 </head>
 <body>
@@ -211,39 +234,53 @@
     <div class="nav-logo">Guardian<span>360</span></div>
     <div class="nav-links">
         <a href="#inicio">Inicio</a>
+        <a href="#escenarios">En acción</a>
+        <a href="#paneles">Paneles</a>
         <a href="#funciones">Funciones</a>
         <a href="#asistente">Asistente</a>
         <a href="#descargar">Descargar</a>
         <a href="#privacidad">Privacidad</a>
     </div>
-    <a href="https://play.google.com/store/apps/details?id=com.seguridad.guardian360" class="nav-btn">📱 Descargar</a>
+    <a href="#descargar" class="nav-btn">📱 Descargar App</a>
 </nav>
 
 <!-- HERO -->
 <section id="inicio">
-    <div class="hero-bg"></div>
-    <div class="hero-grid"></div>
+    <div class="hero-bg-img"></div>
+    <div class="hero-overlay"></div>
     <div class="hero-content">
         <div>
             <div class="hero-badge">🛡️ Seguridad Ciudadana · Perú</div>
             <h1 class="hero-title">Protege lo que<br>más <span>importa</span></h1>
             <p class="hero-desc">Guardian360 es la app de seguridad ciudadana más completa del Perú. Alertas en tiempo real, monitoreo familiar, asistente de voz y panel municipal integrado.</p>
             <div class="hero-btns">
-                <a href="https://play.google.com/store/apps/details?id=com.seguridad.guardian360" class="btn-primary">📱 Descargar Gratis</a>
-                <a href="#funciones" class="btn-secondary">Ver funciones →</a>
+                <a href="https://play.google.com/store/apps/details?id=com.seguridad.guardian360" class="btn-primary">▶ Google Play</a>
+                <a href="https://github.com/guardian360-hub/guardian360-hub.github.io/releases/download/v1.0/app-release.apk" class="btn-apk">⬇️ Descargar APK</a>
+                <a href="#escenarios" class="btn-secondary">Ver en acción →</a>
             </div>
         </div>
-        <div class="hero-phone">
-            <div class="phone-frame">
-                <div class="phone-shield">🛡️</div>
-                <div class="phone-logo">Guardian<span>360</span></div>
-                <div class="phone-stats">
-                    <div class="phone-stat"><div class="num">24/7</div><div class="lbl">Activo</div></div>
-                    <div class="phone-stat"><div class="num">🎤</div><div class="lbl">Voz</div></div>
-                    <div class="phone-stat"><div class="num">📍</div><div class="lbl">GPS</div></div>
-                    <div class="phone-stat"><div class="num">🔔</div><div class="lbl">Alertas</div></div>
+        <div class="hero-visual">
+            <div class="phone-shell">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                    <div class="ps-topbar">
+                        <div class="ps-logo">Guardian<b>360</b></div>
+                        <div class="ps-online"><div class="ps-online-dot"></div>EN LÍNEA</div>
+                    </div>
+                    <div class="ps-sos"><div class="ps-sos-t">🚨 SOS</div><div class="ps-sos-s">Toca para activar emergencia</div></div>
+                    <div class="ps-alert"><div style="font-size:14px">🔴</div><div><div class="ps-alert-text">Alerta activa — Robo Jr. Cusco</div><div class="ps-alert-sub">Hace 2 min · 3 agentes notificados</div></div></div>
+                    <div class="ps-map">
+                        <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=400&q=60" alt="mapa ciudad"/>
+                        <div class="ps-map-overlay"><div class="ps-map-pin"></div></div>
+                        <div class="ps-map-label">📍 San Sebastián, Cusco</div>
+                    </div>
+                    <div class="ps-grid">
+                        <div class="ps-card"><div class="ps-card-num">3</div><div class="ps-card-lbl">Agentes</div></div>
+                        <div class="ps-card"><div class="ps-card-num">2</div><div class="ps-card-lbl">Alertas</div></div>
+                        <div class="ps-card"><div class="ps-card-num">5</div><div class="ps-card-lbl">Familia</div></div>
+                        <div class="ps-card"><div class="ps-card-num" style="color:#4CAF50">🎤</div><div class="ps-card-lbl">Voz ON</div></div>
+                    </div>
                 </div>
-                <div class="phone-sos">🚨 SOS</div>
             </div>
         </div>
     </div>
@@ -257,6 +294,164 @@
         <div class="stat-item"><div class="big">Gratis</div><div class="small">En Google Play</div></div>
     </div>
 </div>
+
+<!-- EN ACCIÓN -->
+<section id="escenarios">
+    <div class="section-inner">
+        <div class="section-tag">Guardian360 en acción</div>
+        <h2 class="section-title">Actuando en<br><span>situaciones reales</span></h2>
+        <p class="section-desc">Así es como Guardian360 responde ante emergencias reales en tu distrito.</p>
+        <div class="escenarios-grid">
+
+            <div class="escenario-card">
+                <div class="esc-img">
+                    <img src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=600&q=80" alt="emergencia nocturna"/>
+                    <div class="esc-overlay"></div>
+                    <div class="esc-badge rojo"><div class="live-dot"></div> EN VIVO</div>
+                    <div class="esc-title-overlay"><h3>🚨 Alerta de emergencia enviada</h3></div>
+                </div>
+                <div class="esc-info">
+                    <div class="esc-tag rojo">🔫 Robo en progreso</div>
+                    <div class="esc-desc">Di "Guardian robo" y la alerta llega al instante con tu ubicación GPS exacta a toda la red de seguridad del distrito.</div>
+                </div>
+            </div>
+
+            <div class="escenario-card">
+                <div class="esc-img">
+                    <img src="https://images.unsplash.com/photo-1616166330003-b0c6a8f1b343?w=600&q=80" alt="familia segura"/>
+                    <div class="esc-overlay"></div>
+                    <div class="esc-badge verde"><div class="live-dot" style="background:#4CAF50"></div> CONECTADO</div>
+                    <div class="esc-title-overlay"><h3>👨‍👩‍👧 Monitoreo familiar activo</h3></div>
+                </div>
+                <div class="esc-info">
+                    <div class="esc-tag verde">📹 Monitoreo familiar</div>
+                    <div class="esc-desc">Ve la cámara y escucha el audio de tus familiares en tiempo real. Cámara frontal y trasera disponibles desde cualquier lugar.</div>
+                </div>
+            </div>
+
+            <div class="escenario-card">
+                <div class="esc-img">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80" alt="accidente vial"/>
+                    <div class="esc-overlay"></div>
+                    <div class="esc-badge naranja"><div class="live-dot" style="background:#FF9800"></div> ALERTA</div>
+                    <div class="esc-title-overlay"><h3>🚗 Accidente reportado al distrito</h3></div>
+                </div>
+                <div class="esc-info">
+                    <div class="esc-tag naranja">🚗 Accidente vial</div>
+                    <div class="esc-desc">Di "Guardian accidente" y el reporte llega con ubicación exacta. Todo el distrito queda alertado en segundos.</div>
+                </div>
+            </div>
+
+            <div class="escenario-card">
+                <div class="esc-img">
+                    <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=80" alt="incendio"/>
+                    <div class="esc-overlay"></div>
+                    <div class="esc-badge rojo"><div class="live-dot"></div> EMERGENCIA</div>
+                    <div class="esc-title-overlay"><h3>🔥 Incendio reportado por voz</h3></div>
+                </div>
+                <div class="esc-info">
+                    <div class="esc-tag rojo">🔥 Incendio</div>
+                    <div class="esc-desc">Di "Guardian fuego" y la alerta de incendio con tu ubicación exacta llega a toda la red de seguridad al instante.</div>
+                </div>
+            </div>
+
+            <div class="escenario-card">
+                <div class="esc-img">
+                    <img src="https://images.unsplash.com/photo-1593113616828-6f22bca04804?w=600&q=80" alt="seguridad nocturna"/>
+                    <div class="esc-overlay"></div>
+                    <div class="esc-badge azul"><div class="live-dot" style="background:#64B5F6"></div> VIGILANDO</div>
+                    <div class="esc-title-overlay"><h3>👮 Agente de seguridad activo</h3></div>
+                </div>
+                <div class="esc-info">
+                    <div class="esc-tag azul">👮 Panel de agentes</div>
+                    <div class="esc-desc">El alcalde ve en tiempo real la ubicación de todos los agentes del distrito y puede asignarles emergencias al instante.</div>
+                </div>
+            </div>
+
+            <div class="escenario-card">
+                <div class="esc-img">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&q=80" alt="asistente de voz"/>
+                    <div class="esc-overlay"></div>
+                    <div class="esc-badge verde"><div class="live-dot" style="background:#4CAF50"></div> ESCUCHANDO</div>
+                    <div class="esc-title-overlay"><h3>🎤 Asistente de voz activado</h3></div>
+                </div>
+                <div class="esc-info">
+                    <div class="esc-tag verde">🎤 Asistente Guardian</div>
+                    <div class="esc-desc">Di "Guardian" seguido del comando y actúa sin tocar el celular. Más de 30 comandos disponibles para toda la app.</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- PANELES WEB -->
+<section id="paneles">
+    <div class="section-inner">
+        <div class="section-tag">Paneles Web</div>
+        <h2 class="section-title">Accede desde<br><span>cualquier dispositivo</span></h2>
+        <p class="section-desc">Controla todo desde tu laptop, PC o Smart TV. Sin instalar nada, solo con tu código de acceso.</p>
+        <div class="paneles-grid">
+            <div class="panel-card">
+                <div class="panel-img">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" alt="panel municipal"/>
+                    <div class="panel-img-overlay">
+                        <div class="panel-screen-mini">
+                            <div class="panel-mini-bar">
+                                <div class="panel-mini-title">🛡️ Panel Municipal — Guardian360</div>
+                                <div class="panel-mini-dots">
+                                    <div class="panel-mini-dot" style="background:#FF5F57"></div>
+                                    <div class="panel-mini-dot" style="background:#FEBC2E"></div>
+                                    <div class="panel-mini-dot" style="background:#28C840"></div>
+                                </div>
+                            </div>
+                            <div class="panel-mini-body">
+                                <div class="pm-stat r"><div class="pm-stat-num">3</div><div class="pm-stat-lbl">Emergencias</div></div>
+                                <div class="pm-stat g"><div class="pm-stat-num">8</div><div class="pm-stat-lbl">Agentes</div></div>
+                                <div class="pm-stat b"><div class="pm-stat-num">142</div><div class="pm-stat-lbl">Usuarios</div></div>
+                            </div>
+                            <div class="panel-mini-map"><span>🗺️ Mapa en tiempo real</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-info">
+                    <div class="panel-info-title">Panel Municipal</div>
+                    <div class="panel-info-desc">Gestiona tu equipo de seguridad, visualiza emergencias en el mapa y controla todo el distrito en tiempo real desde cualquier navegador.</div>
+                    <a href="https://seguridadciudadana-80c31.web.app" target="_blank" class="panel-btn azul-btn">🖥️ Abrir Panel Municipal →</a>
+                </div>
+            </div>
+
+            <div class="panel-card">
+                <div class="panel-img">
+                    <img src="https://images.unsplash.com/photo-1664575602554-2087b04935a5?w=800&q=80" alt="panel empresarial"/>
+                    <div class="panel-img-overlay">
+                        <div class="panel-screen-mini">
+                            <div class="panel-mini-bar" style="background:linear-gradient(90deg,#1A2744,#263550)">
+                                <div class="panel-mini-title">🏢 Panel Empresarial — Guardian360</div>
+                                <div class="panel-mini-dots">
+                                    <div class="panel-mini-dot" style="background:#FF5F57"></div>
+                                    <div class="panel-mini-dot" style="background:#FEBC2E"></div>
+                                    <div class="panel-mini-dot" style="background:#28C840"></div>
+                                </div>
+                            </div>
+                            <div class="panel-mini-body">
+                                <div class="pm-stat g"><div class="pm-stat-num">12</div><div class="pm-stat-lbl">Activos</div></div>
+                                <div class="pm-stat b"><div class="pm-stat-num">3</div><div class="pm-stat-lbl">Vehículos</div></div>
+                                <div class="pm-stat" style="background:#4A148C"><div class="pm-stat-num">85%</div><div class="pm-stat-lbl">Combustible</div></div>
+                            </div>
+                            <div class="panel-mini-map"><span>📊 Control de recursos</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-info">
+                    <div class="panel-info-title">Panel Empresarial</div>
+                    <div class="panel-info-desc">Controla la asistencia de tu personal, gestiona vehículos y monitorea el combustible de tu empresa en tiempo real.</div>
+                    <a href="https://seguridadciudadana-80c31.web.app/empresa.html" target="_blank" class="panel-btn verde-btn">🏢 Abrir Panel Empresarial →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- FUNCIONES -->
 <section id="funciones">
@@ -285,38 +480,50 @@
         <h2 class="section-title">Una app para<br><span>toda la comunidad</span></h2>
         <p class="section-desc">Guardian360 conecta a toda la comunidad en una red de seguridad.</p>
         <div class="para-quien-grid">
-            <div class="pq-card azul">
-                <div class="pq-icon">👨‍👩‍👧</div>
-                <div class="pq-title">Familias</div>
-                <div class="pq-desc">Mantén a tu familia conectada y segura.</div>
-                <ul class="pq-list">
-                    <li>Monitoreo de cámara en tiempo real</li>
-                    <li>Ubicación GPS de familiares</li>
-                    <li>Alertas de emergencia</li>
-                    <li>Asistente de voz Guardian</li>
-                </ul>
+            <div class="pq-card">
+                <div class="pq-img">
+                    <img src="https://images.unsplash.com/photo-1609220136736-443140cffec6?w=600&q=80" alt="familia"/>
+                    <div class="pq-img-overlay azul"><div class="pq-img-title">👨‍👩‍👧 Familias</div></div>
+                </div>
+                <div class="pq-body">
+                    <div class="pq-desc">Mantén a tu familia conectada y segura en todo momento.</div>
+                    <ul class="pq-list">
+                        <li>Monitoreo de cámara en tiempo real</li>
+                        <li>Ubicación GPS de familiares</li>
+                        <li>Alertas de emergencia</li>
+                        <li>Asistente de voz Guardian</li>
+                    </ul>
+                </div>
             </div>
-            <div class="pq-card verde">
-                <div class="pq-icon">🏛️</div>
-                <div class="pq-title">Municipios</div>
-                <div class="pq-desc">Gestiona tu equipo de seguridad.</div>
-                <ul class="pq-list">
-                    <li>Panel de control municipal</li>
-                    <li>Gestión de agentes</li>
-                    <li>Asignación de emergencias</li>
-                    <li>Panel web en tiempo real</li>
-                </ul>
+            <div class="pq-card">
+                <div class="pq-img">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80" alt="municipio"/>
+                    <div class="pq-img-overlay verde"><div class="pq-img-title">🏛️ Municipios</div></div>
+                </div>
+                <div class="pq-body">
+                    <div class="pq-desc">Gestiona tu equipo de seguridad con herramientas profesionales.</div>
+                    <ul class="pq-list">
+                        <li>Panel de control municipal</li>
+                        <li>Gestión de agentes</li>
+                        <li>Asignación de emergencias</li>
+                        <li>Panel web en tiempo real</li>
+                    </ul>
+                </div>
             </div>
-            <div class="pq-card naranja">
-                <div class="pq-icon">🏢</div>
-                <div class="pq-title">Empresas</div>
-                <div class="pq-desc">Control total de tu equipo.</div>
-                <ul class="pq-list">
-                    <li>Control de asistencia</li>
-                    <li>Gestión de vehículos</li>
-                    <li>Control de combustible</li>
-                    <li>Reportes en PDF</li>
-                </ul>
+            <div class="pq-card">
+                <div class="pq-img">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80" alt="empresa"/>
+                    <div class="pq-img-overlay naranja"><div class="pq-img-title">🏢 Empresas</div></div>
+                </div>
+                <div class="pq-body">
+                    <div class="pq-desc">Control total de tu equipo y recursos empresariales.</div>
+                    <ul class="pq-list">
+                        <li>Control de asistencia</li>
+                        <li>Gestión de vehículos</li>
+                        <li>Control de combustible</li>
+                        <li>Reportes en PDF</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -349,16 +556,24 @@
 <section id="descargar">
     <div class="section-inner">
         <div class="section-tag" style="background:rgba(255,255,255,0.1);color:var(--oro)">Descarga</div>
-        <h2 class="section-title">Disponible<br><span>en Google Play</span></h2>
-        <p class="section-desc">Descarga Guardian360 gratis y únete a la red de seguridad ciudadana.</p>
+        <h2 class="section-title">Descarga<br><span>Guardian360</span></h2>
+        <p class="section-desc">Disponible gratis. Descarga desde Google Play o directamente el APK.</p>
         <div class="download-btns">
             <a href="https://play.google.com/store/apps/details?id=com.seguridad.guardian360" class="dl-btn">
                 <span class="icon">▶</span>
                 <div><span class="sub">Disponible en</span>Google Play</div>
             </a>
-            <a href="https://seguridadciudadana-80c31.web.app" class="dl-btn">
-                <span class="icon">🌐</span>
-                <div><span class="sub">Panel Municipal</span>Versión Web</div>
+            <a href="https://github.com/guardian360-hub/guardian360-hub.github.io/releases/download/v1.0/app-release.apk" class="dl-btn verde-dl">
+                <span class="icon">⬇️</span>
+                <div><span class="sub">Descarga directa</span>APK v1.0 · 53 MB</div>
+            </a>
+            <a href="https://seguridadciudadana-80c31.web.app" target="_blank" class="dl-btn">
+                <span class="icon">🖥️</span>
+                <div><span class="sub">Acceder al</span>Panel Municipal</div>
+            </a>
+            <a href="https://seguridadciudadana-80c31.web.app/empresa.html" target="_blank" class="dl-btn">
+                <span class="icon">🏢</span>
+                <div><span class="sub">Acceder al</span>Panel Empresarial</div>
             </a>
         </div>
     </div>
@@ -372,49 +587,14 @@
         <p class="section-desc">Transparencia total sobre cómo manejamos tu información.</p>
         <div class="privacidad-content">
             <div class="priv-date">Última actualización: 6 de mayo de 2026 · Desarrollado por Wilson Tapia Apaza</div>
-            <div class="priv-section">
-                <h3>🛡️ ¿Qué es Guardian360?</h3>
-                <p>Guardian360 es una aplicación privada e independiente de seguridad ciudadana. No está afiliada ni representa a ninguna entidad gubernamental, policial ni municipal.</p>
-            </div>
-            <div class="priv-section">
-                <h3>📋 Información que recopilamos</h3>
-                <ul>
-                    <li>Nombre y correo electrónico para crear tu cuenta</li>
-                    <li>Ubicación GPS para enviar alertas de emergencia</li>
-                    <li>Fotos tomadas con la cámara como evidencia de emergencias</li>
-                    <li>Número de celular para comunicación de emergencias</li>
-                    <li>Datos de audio para el asistente de voz (procesados localmente)</li>
-                </ul>
-            </div>
-            <div class="priv-section">
-                <h3>🎯 Cómo usamos tu información</h3>
-                <ul>
-                    <li>Para enviar alertas de emergencia a tu red de seguridad</li>
-                    <li>Para mostrar tu ubicación a familiares y agentes autorizados</li>
-                    <li>Para gestionar asistencia laboral y control de equipo</li>
-                    <li>Para enviarte notificaciones importantes de seguridad</li>
-                </ul>
-            </div>
-            <div class="priv-section">
-                <h3>📷 Cámara y Micrófono</h3>
-                <p>La aplicación solicita acceso a la cámara para monitoreo familiar y para tomar fotos de evidencia durante emergencias. El micrófono se usa para el asistente de voz Guardian. No accedemos a ninguno sin tu permiso explícito.</p>
-            </div>
-            <div class="priv-section">
-                <h3>📍 Ubicación</h3>
-                <p>Usamos tu ubicación GPS para enviar alertas con tu posición exacta y para mostrar tu ubicación a personas que tú autorices. La ubicación en segundo plano se usa para el rastreo de agentes de seguridad en campo.</p>
-            </div>
-            <div class="priv-section">
-                <h3>🔒 Compartir información</h3>
-                <p>No vendemos ni compartimos tu información personal con terceros. Los datos solo se comparten con los usuarios que tú autorices dentro de la aplicación.</p>
-            </div>
-            <div class="priv-section">
-                <h3>🔐 Seguridad</h3>
-                <p>Todos los datos se almacenan de forma segura en Firebase (Google Cloud). Usamos autenticación segura para proteger tu cuenta.</p>
-            </div>
-            <div class="priv-section">
-                <h3>📞 Contacto</h3>
-                <p>WhatsApp: <strong>+51 984713695</strong><br>Email: <strong>contacto@guardian360.es</strong></p>
-            </div>
+            <div class="priv-section"><h3>🛡️ ¿Qué es Guardian360?</h3><p>Guardian360 es una aplicación privada e independiente de seguridad ciudadana. No está afiliada ni representa a ninguna entidad gubernamental, policial ni municipal.</p></div>
+            <div class="priv-section"><h3>📋 Información que recopilamos</h3><ul><li>Nombre y correo electrónico para crear tu cuenta</li><li>Ubicación GPS para enviar alertas de emergencia</li><li>Fotos tomadas con la cámara como evidencia de emergencias</li><li>Número de celular para comunicación de emergencias</li><li>Datos de audio para el asistente de voz (procesados localmente)</li></ul></div>
+            <div class="priv-section"><h3>🎯 Cómo usamos tu información</h3><ul><li>Para enviar alertas de emergencia a tu red de seguridad</li><li>Para mostrar tu ubicación a familiares y agentes autorizados</li><li>Para gestionar asistencia laboral y control de equipo</li><li>Para enviarte notificaciones importantes de seguridad</li></ul></div>
+            <div class="priv-section"><h3>📷 Cámara y Micrófono</h3><p>La aplicación solicita acceso a la cámara para monitoreo familiar y para tomar fotos de evidencia durante emergencias. El micrófono se usa para el asistente de voz Guardian. No accedemos a ninguno sin tu permiso explícito.</p></div>
+            <div class="priv-section"><h3>📍 Ubicación</h3><p>Usamos tu ubicación GPS para enviar alertas con tu posición exacta y para mostrar tu ubicación a personas que tú autorices. La ubicación en segundo plano se usa para el rastreo de agentes de seguridad en campo.</p></div>
+            <div class="priv-section"><h3>🔒 Compartir información</h3><p>No vendemos ni compartimos tu información personal con terceros. Los datos solo se comparten con los usuarios que tú autorices dentro de la aplicación.</p></div>
+            <div class="priv-section"><h3>🔐 Seguridad</h3><p>Todos los datos se almacenan de forma segura en Firebase (Google Cloud). Usamos autenticación segura para proteger tu cuenta.</p></div>
+            <div class="priv-section"><h3>📞 Contacto</h3><p>WhatsApp: <strong>+51 984713695</strong><br>Email: <strong>contacto@guardian360.es</strong></p></div>
         </div>
     </div>
 </section>
@@ -424,19 +604,20 @@
         <div class="footer-top">
             <div>
                 <div class="footer-logo">Guardian<span>360</span></div>
-                <div class="footer-desc">App de seguridad ciudadana para familias, municipios y empresas del Perú.</div>
+                <div class="footer-desc">App de seguridad ciudadana para familias, municipios y empresas del Perú. Protegiendo lo que más importa.</div>
             </div>
             <div class="footer-col">
                 <h4>App</h4>
+                <a href="#escenarios">En acción</a>
                 <a href="#funciones">Funciones</a>
                 <a href="#asistente">Asistente de Voz</a>
-                <a href="#para-quien">Para quién</a>
                 <a href="#descargar">Descargar</a>
             </div>
             <div class="footer-col">
-                <h4>Legal</h4>
+                <h4>Paneles</h4>
+                <a href="https://seguridadciudadana-80c31.web.app" target="_blank">Panel Municipal</a>
+                <a href="https://seguridadciudadana-80c31.web.app/empresa.html" target="_blank">Panel Empresarial</a>
                 <a href="#privacidad">Política de Privacidad</a>
-                <a href="https://seguridadciudadana-80c31.web.app">Panel Web</a>
                 <a href="https://wa.me/51984713695">WhatsApp</a>
             </div>
         </div>
